@@ -9,7 +9,7 @@ const aiRoutes = require('./routes/aiRoutes');
 const spotifyRoutes = require('./routes/spotifyRoutes');
 
 const app = express();
-const PORT = 5001;
+const PORT = process.env.PORT || 5001;
 
 // Middleware
 const corsOptions = {
