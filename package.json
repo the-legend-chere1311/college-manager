@@ -1,0 +1,12 @@
+{
+  "name": "college-manager",
+  "private": true,
+  "workspaces": [
+    "backend"
+  ],
+  "scripts": {
+    "start": "npm run start --workspace backend",
+    "dev": "npm run dev --workspace backend",
+    "install:backend": "npm install --workspace backend"
+  }
+}
