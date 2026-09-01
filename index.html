@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="styles.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Josefin+Sans">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <title>Home | Task Manager</title>
+</head>
+<body>
+<div class="sidebar">
+    <a class="active" href="../index.html"><img src="./icons/home.png"></a>
+    <a href="./task_page/task.html"><img src="./icons/tasks.png"></a>
+    <a href="./schedule_page/schedule.html"><img src="./icons/schedule.png"></a>
+    <a href="./exams_page/exams.html"><img src="./icons/exams.png"></a>
+    <a href="./analytics_page/analytics.html"><img src="./icons/analytics.png"></a>
+    <a href="./settings_page/settings.html"><img src="./icons/settings.png"></a>
+</div>
+
+<div class="header-section">
+    <h1 id="greeting"></h1>
+    
+    <button id="authTriggerBtn" class="auth-trigger-btn">
+        <span>👤</span> Sign In
+    </button>
+    
+    <div id="userInfo" class="user-info">
+        <span>Welcome, <span id="displayUsername" class="username"></span></span>
+        <button id="logoutBtn" class="logout-btn">Logout</button>
+    </div>
+</div>
+
+<div class="content">
+    <div class="container">
+        <div class="box tasks" onclick="window.location.href='./task_page/task.html'">
+            <h3>Upcoming Tasks</h3>
+            <div id="upcomingTasks">
+                <p>Loading...</p>
+            </div>
+        </div>
+        <div class="box exams" onclick="window.location.href='./exams_page/exams.html'">
+            <h3>Upcoming Exams</h3>
+            <div id="upcomingExams">
+                <p>Loading...</p>
+            </div>
+        </div>
+        <div class="box deadline" onclick="generateNewAffirmation()">
+            <h3>Daily Affirmation</h3>
+            <div id="dailyAffirmation">
+                <p>Loading...</p>
+            </div>
+        </div>
+        <div class="box assist">
+            <div class="ai-chat-container">
+                <div class="ai-header">
+                    <h3>🤖 AI Assistant</h3>
+                    <div class="ai-controls">
+                        <div class="ai-status" id="aiStatus">
+                            <span class="status-dot" id="statusDot"></span>
+                            <span id="statusText">Connecting...</span>
+                        </div>
+                        <button id="fullscreenBtn" class="fullscreen-btn" title="Open in fullscreen">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="ai-messages" id="aiMessages">
+                    <div class="ai-message bot">
+                        Hello! I'm your AI assistant. How can I help you today?
+                    </div>
+                </div>
+                <div class="ai-input-area">
+                    <input type="text" id="aiInput" placeholder="Type your message..." />
+                    <button id="aiSendBtn">Send</button>
+                </div>
+            </div>
+        </div>
+        <div class="box schedule" onclick="window.location.href='./schedule_page/schedule.html'">
+            <h3>Today's Schedule</h3>
+            <div id="todaySchedule">
+                <p>Loading...</p>
+            </div>
+        </div>
+        <div class="box spotify">
+            <div class="spotify-container">
+                <!-- Not Connected State -->
+                <div id="spotifyNotConnected" class="spotify-not-connected">
+                    <div class="spotify-logo">🎵</div>
+                    <h3>Connect to Spotify</h3>
+                    <p>Connect your Spotify account to control music</p>
+                    <button id="spotifyConnectBtn" class="spotify-connect-btn">Connect Spotify</button>
+                </div>
+                
+                <!-- Connected State -->
+                <div id="spotifyConnected" class="spotify-connected" style="display: none;">
+                    <div class="spotify-header">
+                        <div class="spotify-user-info">
+                            <div class="spotify-logo">🎵</div>
+                            <span id="spotifyUsername">Loading...</span>
+                        </div>
+                        <button id="spotifyDisconnectBtn" class="spotify-disconnect-btn" title="Disconnect">⚙️</button>
+                    </div>
+                    
+                    <div class="now-playing" id="nowPlaying">
+                        <div class="track-info">
+                            <img id="albumArt" src="" alt="Album Art" class="album-art" style="display: none;">
+                            <div class="track-details">
+                                <div id="trackName" class="track-name">No track playing</div>
+                                <div id="artistName" class="artist-name">Select a song on Spotify</div>
+                            </div>
+                        </div>
+                        
+                        <div class="playback-controls">
+                            <button id="prevBtn" class="control-btn" title="Previous">⏮️</button>
+                            <button id="playPauseBtn" class="control-btn play-pause" title="Play/Pause">▶️</button>
+                            <button id="nextBtn" class="control-btn" title="Next">⏭️</button>
+                        </div>
+                        
+                        <div class="volume-control">
+                            <span class="volume-icon">🔊</span>
+                            <input type="range" id="volumeSlider" class="volume-slider" min="0" max="100" value="50">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Loading State -->
+                <div id="spotifyLoading" class="spotify-loading" style="display: none;">
+                    <div class="loading-spinner"></div>
+                    <p>Connecting to Spotify...</p>
+                </div>
+            </div>
+        </div>
+        <div class="box notes">
+            <div class="notes-header">
+                <h3>Quick Notes</h3>
+                <div class="notes-controls">
+                    <button id="previewToggle" class="preview-toggle" title="Toggle markdown preview">👁️</button>
+                    <button id="clearNotes" onclick="clearQuickNotes()" title="Clear all notes">🗑️</button>
+                </div>
+            </div>
+            <div class="notes-container">
+                <div class="notes-input-section" id="notesInputSection">
+                    <textarea id="quickNotes" placeholder="Type your notes here... (Auto-saves as you type, supports markdown)"></textarea>
+                </div>
+                <div class="notes-preview-section" id="notesPreviewSection" style="display: none;">
+                    <div id="notesPreview" class="notes-preview"></div>
+                </div>
+                <div class="notes-footer">
+                    <small id="saveStatus">Ready</small>
+                    <small class="markdown-hint">💡 Supports **bold**, *italic*, `code`, and more!</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="authModal" class="auth-modal">
+    <div class="auth-modal-content">
+        <!-- Login Form -->
+        <div id="loginForm" class="auth-form">
+            <h2>Welcome Back!</h2>
+            <p>Sign in to access your dashboard</p>
+            <form id="loginFormElement">
+                <input type="text" id="loginUsername" placeholder="Username" required>
+                <input type="password" id="loginPassword" placeholder="Password" required>
+                <button type="submit">Sign In</button>
+            </form>
+            <p class="auth-switch">Don't have an account? <a href="#" id="showRegister">Register here</a></p>
+        </div>
+
+        <!-- Register Form -->
+        <div id="registerForm" class="auth-form" style="display: none;">
+            <h2>Join Us!</h2>
+            <p>Create your account to get started</p>
+            <form id="registerFormElement">
+                <input type="text" id="registerUsername" placeholder="Choose a username" required>
+                <input type="email" id="registerEmail" placeholder="Email address" required>
+                <input type="password" id="registerPassword" placeholder="Create password" required>
+                <input type="password" id="confirmPassword" placeholder="Confirm password" required>
+                <button type="submit">Create Account</button>
+            </form>
+            <p class="auth-switch">Already have an account? <a href="#" id="showLogin">Sign in here</a></p>
+        </div>
+    </div>
+</div>
+
+<div id="fullscreenModal" class="fullscreen-modal">
+    <div class="fullscreen-content">
+        <div class="fullscreen-header">
+            <h2>🤖 AI Assistant - Full Screen</h2>
+            <button id="closeFullscreenBtn" class="close-fullscreen-btn">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <div class="fullscreen-messages" id="fullscreenMessages">
+            <!-- Messages will be synchronized from main chat -->
+        </div>
+        <div class="fullscreen-input-area">
+            <input type="text" id="fullscreenInput" placeholder="Type your message..." />
+            <button id="fullscreenSendBtn">Send</button>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

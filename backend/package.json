@@ -1,0 +1,29 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test-ai": "node test-ai.js",
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "install-deps": "npm install",
+    "setup": "npm install && echo 'Backend setup complete! Run npm start to begin.'"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "axios": "^1.12.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
+    "express": "^4.21.2",
+    "mongodb": "^6.12.0",
+    "mongoose": "^8.18.1",
+    "ollama": "^0.5.18"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

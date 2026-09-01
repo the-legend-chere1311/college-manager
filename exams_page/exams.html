@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="exams.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Josefin+Sans">
+    <title>Exams | Task Manager</title>
+</head>
+<body>
+    <div class="sidebar">
+        <a href="../index.html"><img src="../icons/home.png"></a>
+        <a href="../task_page/task.html"><img src="../icons/tasks.png"></a>
+        <a href="../schedule_page/schedule.html"><img src="../icons/schedule.png"></a>
+        <a class="active" href="../exams_page/exams.html"><img src="../icons/exams.png"></a>
+        <a href="../analytics_page/analytics.html"><img src="../icons/analytics.png"></a>
+        <a href="../settings_page/settings.html"><img src="../icons/settings.png"></a>
+    </div>
+    
+    <div class="main-content">
+        <header class="page-header">
+            <h1>Exams</h1>
+            <div class="header-buttons">
+                <button class="update-capitalization-btn" onclick="updateExistingExamsCapitalization()" title="Update existing exams to proper capitalization">
+                    ✓ Fix Capitalization
+                </button>
+                <button class="add-exam-btn" onclick="showAddExamModal()">Add Exam</button>
+            </div>
+        </header>
+        
+        <div class="exam-container">
+            <div class="exam-list">
+                <div class="section-header">
+                    <h2>Upcoming</h2>
+                </div>
+                <div id="upcoming-exams" class="exam-cards">
+                    <!-- Upcoming exam cards will be dynamically inserted here -->
+                </div>
+                
+                <div class="section-header">
+                    <h2>Completed</h2>
+                </div>
+                <div id="completed-exams" class="exam-cards">
+                    <!-- Completed exam cards will be dynamically inserted here -->
+                </div>
+            </div>
+            
+            <div class="exam-details">
+                <div id="exam-detail-panel" class="detail-panel">
+                    <div class="no-selection">
+                        <p>Select an exam to view details</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Exam Modal -->
+    <div id="exam-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Add Exam</h3>
+                <span class="close" onclick="hideExamModal()">&times;</span>
+            </div>
+            <form id="exam-form">
+                <div class="form-group">
+                    <label for="subject">Subject:</label>
+                    <input type="text" id="subject" name="subject" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="examDate">Exam Date:</label>
+                    <input type="date" id="examDate" name="examDate" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="maxMarks">Maximum Marks:</label>
+                    <input type="number" id="maxMarks" name="maxMarks" min="1" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="examType">Exam Type:</label>
+                    <select id="examType" name="examType">
+                        <option value="midterm">Midterm</option>
+                        <option value="final">Final</option>
+                        <option value="quiz">Quiz</option>
+                        <option value="assignment">Assignment</option>
+                        <option value="project">Project</option>
+                    </select>
+                </div>
+                
+                <div id="completed-fields" class="completed-fields" style="display: none;">
+                    <div class="form-group">
+                        <label for="achievedMarks">Achieved Marks:</label>
+                        <input type="number" id="achievedMarks" name="achievedMarks" min="0">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="finalGradePercent">Percent Grade (Auto-calculated):</label>
+                        <input type="number" id="finalGradePercent" name="finalGradePercent" min="0" max="100" step="0.01" readonly>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="notes">Notes (optional):</label>
+                    <textarea id="notes" name="notes" rows="3"></textarea>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" onclick="hideExamModal()">Cancel</button>
+                    <button type="submit">Save Exam</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Initialize theme on page load
+        document.addEventListener("DOMContentLoaded", function() {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-mode');
+            }
+        });
+    </script>
+    <script src="exams.js"></script>
+</body>
+</html>

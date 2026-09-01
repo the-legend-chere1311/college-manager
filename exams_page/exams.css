@@ -1,0 +1,717 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+body {
+    background-color: #1a1a1a;
+    color: #f1f1f1;
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar styles */
+img {
+    height: 100%;
+    width: 100%;
+}
+
+.sidebar {
+    margin: 0;
+    padding: 0;
+    width: 50px;
+    background-color: #2C3E50;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+}
+
+.sidebar a {
+    display: block;
+    padding: 16px;
+    text-decoration: none;
+}
+
+.sidebar a.active {
+    background-color: #111921;
+}
+
+.sidebar a:hover:not(.active) {
+    background-color: #1A2633;
+}
+
+/* Main content layout */
+.main-content {
+    margin-left: 50px;
+    padding: 20px;
+    width: calc(100% - 50px);
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.page-header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    color: #f1f1f1;
+}
+
+.header-buttons {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.add-exam-btn {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-exam-btn:hover {
+    background-color: #2980b9;
+}
+
+.update-capitalization-btn {
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.update-capitalization-btn:hover {
+    background-color: #219a52;
+}
+
+/* Exam container layout */
+.exam-container {
+    display: flex;
+    gap: 30px;
+    height: calc(100vh - 140px);
+}
+
+.exam-list {
+    flex: 1;
+    max-width: 60%;
+    overflow-y: auto;
+}
+
+.exam-details {
+    flex: 1;
+    max-width: 40%;
+    background-color: #2c3e50;
+    border-radius: 12px;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+/* Section headers */
+.section-header {
+    margin-bottom: 20px;
+}
+
+.section-header h2 {
+    color: #ecf0f1;
+    font-size: 1.5rem;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 8px;
+    margin-bottom: 15px;
+}
+
+/* Exam cards */
+.exam-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 40px;
+}
+
+.exam-card {
+    background-color: #34495e;
+    border-radius: 12px;
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.exam-card:hover {
+    background-color: #3c5869;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.exam-card.selected {
+    border-color: #3498db;
+    background-color: #3c5869;
+}
+
+.exam-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.exam-title {
+    color: #ecf0f1;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.exam-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.edit-btn, .details-btn {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.edit-btn:hover, .details-btn:hover {
+    background-color: #2980b9;
+}
+
+.exam-card-body .exam-subject {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #ecf0f1;
+    margin-bottom: 8px;
+}
+
+.exam-card-body .exam-date {
+    color: #bdc3c7;
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+}
+
+.exam-card-body .exam-marks {
+    color: #95a5a6;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+.exam-results {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #4a5f7a;
+}
+
+.exam-results .achieved-marks {
+    color: #27ae60;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.exam-results .percent-grade {
+    color: #f39c12;
+    font-weight: 600;
+}
+
+/* Detail panel */
+.detail-panel {
+    height: 100%;
+}
+
+.no-selection {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: #7f8c8d;
+    font-style: italic;
+}
+
+.exam-details-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #34495e;
+}
+
+.exam-details-header h2 {
+    color: #ecf0f1;
+    font-size: 1.8rem;
+}
+
+.edit-exam-btn {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.edit-exam-btn:hover {
+    background-color: #c0392b;
+}
+
+.exam-info {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.info-item label {
+    color: #95a5a6;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.info-item span {
+    color: #ecf0f1;
+    font-size: 1rem;
+}
+
+.status-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #34495e;
+    border-radius: 8px;
+}
+
+.status-badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.status-badge.upcoming {
+    background-color: #f39c12;
+    color: white;
+}
+
+.complete-exam-btn {
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.complete-exam-btn:hover {
+    background-color: #219a52;
+}
+
+.notes p {
+    background-color: #34495e;
+    padding: 10px;
+    border-radius: 6px;
+    margin-top: 5px;
+    line-height: 1.4;
+}
+
+.no-exams {
+    text-align: center;
+    color: #7f8c8d;
+    padding: 30px;
+    font-style: italic;
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(3px);
+}
+
+.modal-content {
+    background-color: #2c3e50;
+    margin: 5% auto;
+    padding: 0;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px;
+    border-bottom: 1px solid #34495e;
+}
+
+.modal-header h3 {
+    color: #ecf0f1;
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.close {
+    color: #bdc3c7;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.close:hover {
+    color: #ecf0f1;
+}
+
+#exam-form {
+    padding: 25px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    color: #ecf0f1;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #4a5f7a;
+    border-radius: 6px;
+    background-color: #34495e;
+    color: #ecf0f1;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+.form-group input[readonly] {
+    background-color: #2c3e50;
+    border-color: #34495e;
+    color: #95a5a6;
+    cursor: not-allowed;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.completed-fields {
+    border-top: 1px solid #4a5f7a;
+    padding-top: 20px;
+    margin-top: 20px;
+}
+
+.form-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #4a5f7a;
+}
+
+.form-actions button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form-actions button[type="submit"] {
+    background-color: #27ae60;
+    color: white;
+}
+
+.form-actions button[type="submit"]:hover {
+    background-color: #219a52;
+}
+
+.form-actions button[type="button"] {
+    background-color: #95a5a6;
+    color: white;
+}
+
+.form-actions button[type="button"]:hover {
+    background-color: #7f8c8d;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .exam-container {
+        flex-direction: column;
+        height: auto;
+    }
+    
+    .exam-list,
+    .exam-details {
+        max-width: 100%;
+    }
+    
+    .exam-details {
+        margin-top: 20px;
+        min-height: 300px;
+    }
+    
+    .modal-content {
+        width: 95%;
+        margin: 10% auto;
+    }
+}
+
+/* ========== LIGHT MODE STYLES ========== */
+body.light-mode {
+    background-color: #f7fafc;
+    color: #2d3748;
+}
+
+/* Light mode sidebar */
+.light-mode .sidebar {
+    background-color: #ffffff;
+    border-right: 1px solid #e2e8f0;
+}
+
+.light-mode .sidebar a.active {
+    background-color: #edf2f7;
+}
+
+.light-mode .sidebar a:hover:not(.active) {
+    background-color: #f7fafc;
+}
+
+/* Light mode main content */
+.light-mode h1 {
+    color: #2d3748;
+}
+
+.light-mode .add-exam-btn {
+    background-color: #3182ce;
+    color: white;
+}
+
+.light-mode .add-exam-btn:hover {
+    background-color: #2b6cb0;
+}
+
+/* Light mode exam sections */
+.light-mode .exam-section {
+    background-color: white;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.light-mode .exam-section h2 {
+    color: #2d3748;
+    border-bottom-color: #e2e8f0;
+}
+
+/* Light mode exam cards */
+.light-mode .exam-card {
+    background-color: #f7fafc;
+    border-color: #e2e8f0;
+    color: #2d3748;
+}
+
+.light-mode .exam-card:hover {
+    background-color: #edf2f7;
+    border-color: #cbd5e0;
+}
+
+.light-mode .exam-card.selected {
+    background-color: #e6f3ff;
+    border-color: #3182ce;
+}
+
+.light-mode .exam-card h3 {
+    color: #2d3748;
+}
+
+.light-mode .exam-card p {
+    color: #4a5568;
+}
+
+.light-mode .exam-meta {
+    color: #718096;
+}
+
+.light-mode .exam-date {
+    color: #3182ce;
+}
+
+.light-mode .exam-priority.high {
+    background-color: #feb2b2;
+    color: #742a2a;
+}
+
+.light-mode .exam-priority.medium {
+    background-color: #fbd38d;
+    color: #744210;
+}
+
+.light-mode .exam-priority.low {
+    background-color: #c6f6d5;
+    color: #22543d;
+}
+
+/* Light mode exam details */
+.light-mode .detail-panel {
+    background-color: white;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.light-mode .no-selection p {
+    color: #718096;
+}
+
+.light-mode .exam-detail h3 {
+    color: #2d3748;
+}
+
+.light-mode .exam-detail p {
+    color: #4a5568;
+}
+
+.light-mode .exam-actions .edit-btn {
+    background-color: #805ad5;
+    color: white;
+}
+
+.light-mode .exam-actions .edit-btn:hover {
+    background-color: #6b46c1;
+}
+
+.light-mode .exam-actions .delete-btn {
+    background-color: #e53e3e;
+    color: white;
+}
+
+.light-mode .exam-actions .delete-btn:hover {
+    background-color: #c53030;
+}
+
+.light-mode .exam-actions .complete-btn {
+    background-color: #38a169;
+    color: white;
+}
+
+.light-mode .exam-actions .complete-btn:hover {
+    background-color: #2f855a;
+}
+
+/* Light mode completed exams */
+.light-mode .completed-exam {
+    background-color: #e6fffa;
+    border-color: #81e6d9;
+    color: #2d3748;
+}
+
+.light-mode .completed-exam:hover {
+    background-color: #b2f5ea;
+}
+
+/* Light mode modal */
+.light-mode .modal {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.light-mode .modal-content {
+    background-color: white;
+    color: #2d3748;
+    border: 1px solid #e2e8f0;
+}
+
+.light-mode .modal-content h2 {
+    color: #2d3748;
+}
+
+.light-mode .form-group label {
+    color: #4a5568;
+}
+
+.light-mode .form-group input,
+.light-mode .form-group textarea,
+.light-mode .form-group select {
+    background-color: #f7fafc;
+    border-color: #cbd5e0;
+    color: #2d3748;
+}
+
+.light-mode .form-group input:focus,
+.light-mode .form-group textarea:focus,
+.light-mode .form-group select:focus {
+    border-color: #3182ce;
+}
+
+.light-mode .form-actions button[type="submit"] {
+    background-color: #3182ce;
+    color: white;
+}
+
+.light-mode .form-actions button[type="submit"]:hover {
+    background-color: #2b6cb0;
+}
+
+.light-mode .form-actions button[type="button"] {
+    background-color: #718096;
+    color: white;
+}
+
+.light-mode .form-actions button[type="button"]:hover {
+    background-color: #4a5568;
+}

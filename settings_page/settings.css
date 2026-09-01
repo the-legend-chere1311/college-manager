@@ -1,0 +1,384 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+body {
+    background-color: #1a1a1a;
+    color: #f1f1f1;
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar styles */
+img {
+    height: 100%;
+    width: 100%;
+}
+
+.sidebar {
+    margin: 0;
+    padding: 0;
+    width: 50px;
+    background-color: #2C3E50;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+}
+
+.sidebar a {
+    display: block;
+    padding: 16px;
+    text-decoration: none;
+}
+
+.sidebar a.active {
+    background-color: #111921;
+}
+
+.sidebar a:hover:not(.active) {
+    background-color: #1A2633;
+}
+
+/* Main content */
+.content {
+    margin-left: 70px;
+    padding: 20px;
+    width: calc(100% - 70px);
+}
+
+h1 {
+    margin-bottom: 30px;
+    color: #f1f1f1;
+}
+
+/* Settings container */
+.settings-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Settings sections */
+.settings-section {
+    background-color: #2d3748;
+    border-radius: 8px;
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.settings-section h2 {
+    color: #4a9eff;
+    margin-bottom: 20px;
+    font-size: 1.4em;
+    border-bottom: 2px solid #4a9eff;
+    padding-bottom: 10px;
+}
+
+/* Setting items */
+.setting-item {
+    margin-bottom: 20px;
+}
+
+.setting-item label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #e2e8f0;
+}
+
+/* Input groups */
+.input-group {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.input-group input {
+    flex: 1;
+    padding: 12px;
+    background-color: #1a202c;
+    border: 2px solid #4a5568;
+    border-radius: 6px;
+    color: #f1f1f1;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #4a9eff;
+}
+
+/* Password group */
+.password-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.password-group input {
+    padding: 12px;
+    background-color: #1a202c;
+    border: 2px solid #4a5568;
+    border-radius: 6px;
+    color: #f1f1f1;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+.password-group input:focus {
+    outline: none;
+    border-color: #4a9eff;
+}
+
+/* Buttons */
+.save-btn, .action-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    font-size: 14px;
+}
+
+.save-btn {
+    background-color: #4a9eff;
+    color: white;
+}
+
+.save-btn:hover {
+    background-color: #3182ce;
+    transform: translateY(-2px);
+}
+
+.action-btn {
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.export-btn {
+    background-color: #38a169;
+    color: white;
+}
+
+.export-btn:hover {
+    background-color: #2f855a;
+}
+
+.backup-btn {
+    background-color: #805ad5;
+    color: white;
+}
+
+.backup-btn:hover {
+    background-color: #6b46c1;
+}
+
+.danger-btn {
+    background-color: #e53e3e;
+    color: white;
+}
+
+.danger-btn:hover {
+    background-color: #c53030;
+}
+
+/* Theme toggle */
+.theme-toggle {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.theme-toggle input[type="radio"] {
+    display: none;
+}
+
+.theme-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 18px;
+    background-color: #1a202c;
+    border: 2px solid #4a5568;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 130px;
+}
+
+.theme-option:hover {
+    border-color: #4a9eff;
+}
+
+.theme-toggle input[type="radio"]:checked + .theme-option {
+    background-color: #4a9eff;
+    border-color: #4a9eff;
+    color: white;
+}
+
+.theme-icon {
+    font-size: 18px;
+}
+
+/* Switch toggle */
+.switch-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #4a5568;
+    transition: 0.4s;
+    border-radius: 24px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #4a9eff;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+/* Data buttons */
+.data-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.warning-text {
+    color: #fc8181;
+    font-style: italic;
+    margin-top: 8px;
+}
+
+/* Message container */
+.message-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.message {
+    padding: 15px 20px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    font-weight: 600;
+    animation: slideIn 0.3s ease;
+}
+
+.message.success {
+    background-color: #38a169;
+    color: white;
+}
+
+.message.error {
+    background-color: #e53e3e;
+    color: white;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Light mode styles */
+body.light-mode {
+    background-color: #f7fafc;
+    color: #2d3748;
+}
+
+.light-mode .settings-section {
+    background-color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.light-mode .settings-section h2 {
+    color: #3182ce;
+    border-bottom-color: #3182ce;
+}
+
+.light-mode .setting-item label {
+    color: #2d3748;
+}
+
+.light-mode .input-group input,
+.light-mode .password-group input {
+    background-color: #f7fafc;
+    border-color: #cbd5e0;
+    color: #2d3748;
+}
+
+.light-mode .input-group input:focus,
+.light-mode .password-group input:focus {
+    border-color: #3182ce;
+}
+
+.light-mode .theme-option {
+    background-color: #f7fafc;
+    border-color: #cbd5e0;
+    color: #2d3748;
+}
+
+.light-mode .theme-option:hover {
+    border-color: #3182ce;
+}
+
+.light-mode .slider {
+    background-color: #cbd5e0;
+}
+
+.light-mode input:checked + .slider {
+    background-color: #3182ce;
+}
+
+.light-mode h1 {
+    color: #2d3748;
+}

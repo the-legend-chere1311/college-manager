@@ -1,0 +1,14 @@
+# Uploads Directory
+
+This directory is used for storing uploaded files.
+
+## Structure
+- Keep this directory for file uploads
+- Files uploaded here are ignored by git (see .gitignore)
+- Make sure to implement proper file validation and security measures
+
+## Security Notes
+- Validate file types before upload
+- Implement file size limits
+- Scan for malicious content
+- Use proper file naming conventions

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="analytics.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Josefin+Sans">
+    <title>College GPA Calculator | Task Manager</title>
+</head>
+<body>
+    <div class="sidebar">
+        <a href="../index.html"><img src="../icons/home.png"></a>
+        <a href="../task_page/task.html"><img src="../icons/tasks.png"></a>
+        <a href="../schedule_page/schedule.html"><img src="../icons/schedule.png"></a>
+        <a href="../exams_page/exams.html"><img src="../icons/exams.png"></a>
+        <a class="active" href="../analytics_page/analytics.html"><img src="../icons/analytics.png"></a>
+        <a href="../settings_page/settings.html"><img src="../icons/settings.png"></a>
+    </div>
+    <div class="main-content">
+        <div class="page-header">
+            <h1>College GPA Calculator</h1>
+            <div class="quick-start">
+                <button class="quick-start-btn" onclick="toggleHelp('quickStart')">
+                    🚀 Quick Start Guide
+                </button>
+            </div>
+        </div>
+        
+        <!-- Quick Start Guide -->
+        <div id="quickStart" class="quick-start-section" style="display: none;">
+            <div class="quick-start-content">
+                <h2>🎓 Calculate Your College GPA in 3 Easy Steps</h2>
+                <div class="steps-container">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Configure System</h3>
+                            <p>Select your college's grading system (Standard A-F, Simplified, Numeric, or Pass/Fail) and GPA scale (4.0 or 5.0) below.</p>
+                        </div>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Enter Course Grades</h3>
+                            <p>Add your college courses with names like "Calculus I", letter grades, and credit hours. Most courses are 3-4 credits.</p>
+                        </div>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Track Academic Progress</h3>
+                            <p>Monitor your cumulative GPA, academic standing, semester performance, and get insights for academic success.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="quick-actions">
+                    <button onclick="scrollToSection('gpaConfig')" class="action-btn">⚙️ Configure System</button>
+                    <button onclick="scrollToSection('gradeManagement')" class="action-btn">📝 Add Grades</button>
+                    <button onclick="scrollToSection('gpaDashboard')" class="action-btn">📊 View Analytics</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- GPA Configuration Section -->
+        <div id="gpaConfig" class="analytics-section">
+            <div class="section-header">
+                <h2>GPA Configuration</h2>
+            </div>
+            <p class="section-subtext">Configure your college's grading system and GPA scale. Different colleges use different grading formats - choose the one that matches your transcript.</p>
+            
+            <div class="config-controls">
+                <div class="control-group">
+                    <label for="gpaScale">GPA Scale:</label>
+                    <select id="gpaScale" onchange="updateGPAScale()">
+                        <option value="4.0">4.0 Scale (Unweighted)</option>
+                        <option value="5.0">5.0 Scale (Weighted)</option>
+                    </select>
+                    <small class="field-help">4.0 Scale: Standard college system (A=4.0, B=3.0). 5.0 Scale: Some colleges give 5.0 for A+ grades or honors courses.</small>
+                </div>
+                <div class="control-group">
+                    <label for="gradingSystem">Grading System:</label>
+                    <select id="gradingSystem" onchange="updateGradingSystem()">
+                        <option value="standard">Standard (A+ to F)</option>
+                        <option value="simplified">Simplified (A to F)</option>
+                        <option value="numeric">Numeric (0-100)</option>
+                        <option value="passfail">Pass/Fail</option>
+                    </select>
+                    <small class="field-help">Choose your college's grading system. Standard includes plus/minus grades (A+, A, A-), Simplified uses basic letters, Numeric uses percentage scores.</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Grade Input Section -->
+        <div id="gradeManagement" class="analytics-section">
+            <div class="section-header">
+                <h2>Grade Management</h2>
+            </div>
+            <p class="section-subtext">Add your college course grades here. Enter course name (e.g., "Calculus I", "English 101"), letter grade, and credit hours. Your GPA calculates automatically.</p>
+            
+            <div class="grade-input-section">
+                <div class="add-grade-form">
+                    <div class="form-row">
+                        <input type="text" id="subjectName" placeholder="Subject Name" required>
+                        <input type="text" id="gradeValue" placeholder="Grade" required>
+                        <input type="number" id="creditHours" placeholder="Credit Hours" min="1" max="10" value="3">
+                        <button onclick="addGrade()" class="add-btn">Add Grade</button>
+                    </div>
+                    <div class="input-examples">
+                        <small class="field-help">
+                            <strong>Examples:</strong> 
+                            Course: "Calculus I", Grade: "A-", Credits: 4 | 
+                            Course: "English Composition", Grade: "B+", Credits: 3 | 
+                            Course: "Biology Lab", Grade: "A", Credits: 1 | 
+                            Course: "Psychology 101", Grade: "B", Credits: 3 | 
+                            <strong>Credit Hours:</strong> Most courses 3-4 credits, labs 1-2 credits, seminars 1-3 credits
+                        </small>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Current Grades Display -->
+            <div class="grades-display">
+                <h3>Current Grades</h3>
+                <div id="gradesList" class="grades-list">
+                    <!-- Grades will be dynamically added here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- GPA Dashboard -->
+        <div id="gpaDashboard" class="analytics-section">
+            <h2>GPA Dashboard</h2>
+            <p class="section-subtext">Your calculated college GPA based on course grades and credit hours. Cumulative GPA shows overall academic standing, Current Semester tracks recent performance.</p>
+            <div class="gpa-dashboard">
+                <div class="gpa-card current-gpa">
+                    <h3>Cumulative GPA</h3>
+                    <div class="gpa-value" id="currentGPA">0.00</div>
+                    <div class="gpa-scale" id="currentScale">/ 4.0</div>
+                </div>
+                
+                <div class="gpa-card semester-gpa">
+                    <h3>Current Semester</h3>
+                    <div class="gpa-value" id="semesterGPA">0.00</div>
+                    <div class="gpa-scale" id="semesterScale">/ 4.0</div>
+                </div>
+                
+                <div class="gpa-card academic-standing">
+                    <h3>Academic Standing</h3>
+                    <div class="standing-value" id="academicStanding">Good Standing</div>
+                    <div class="standing-details" id="standingDetails">GPA above 2.0</div>
+                </div>
+                
+                <div class="gpa-card target-gpa">
+                    <h3>Target GPA</h3>
+                    <div class="gpa-input">
+                        <input type="number" id="targetGPA" placeholder="3.5" min="0" max="5" step="0.01" onchange="updateTargetAnalysis()">
+                    </div>
+                </div>
+                
+                <div class="gpa-card credit-hours">
+                    <h3>Total Credits</h3>
+                    <div class="gpa-value" id="totalCredits">0</div>
+                    <div class="gpa-scale">hours</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Performance Charts -->
+        <div id="performanceChart" class="analytics-section">
+            <h2>Performance Analytics</h2>
+            <p class="section-subtext">Visual analysis of your college academic performance. Track GPA trends across semesters and see grade distribution by course to identify academic strengths and improvement areas.</p>
+            <div class="charts-container">
+                <div class="chart-card">
+                    <h3>GPA Trend</h3>
+                    <canvas id="gpaChart" width="400" height="200"></canvas>
+                </div>
+                
+                <div class="chart-card">
+                    <h3>Grade Distribution</h3>
+                    <canvas id="gradeChart" width="400" height="200"></canvas>
+                </div>
+                
+                <div class="chart-card">
+                    <h3>Subject Performance</h3>
+                    <canvas id="subjectChart" width="400" height="200"></canvas>
+                </div>
+                
+                <div class="chart-card">
+                    <h3>Credit Hour Distribution</h3>
+                    <canvas id="creditChart" width="400" height="200"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Performance Insights -->
+        <div class="analytics-section">
+            <h2>Performance Insights</h2>
+            <p class="section-subtext">College-specific academic insights and recommendations. Track academic standing, graduation progress, dean's list eligibility, and get personalized strategies for academic success.</p>
+            <div class="insights-container">
+                <div class="insight-card" id="gpaInsights">
+                    <h4>📊 GPA Analysis</h4>
+                    <div id="gpaAnalysis">Add grades to see detailed analysis</div>
+                </div>
+                
+                <div class="insight-card" id="improvementTips">
+                    <h4>💡 Improvement Suggestions</h4>
+                    <div id="improvementAnalysis">Add a target GPA to see improvement strategies</div>
+                </div>
+                
+                <div class="insight-card" id="trendAnalysis">
+                    <h4>📈 Trend Analysis</h4>
+                    <div id="trendInsights">Track your progress over time</div>
+                </div>
+                
+                <div class="insight-card" id="aiRecommendations">
+                    <h4>🤖 AI Recommendations</h4>
+                    <div id="aiAnalysis">
+                        <button onclick="getAIRecommendations()" class="ai-btn">Get AI Study Plan</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Grade Conversion Reference -->
+        <div class="analytics-section">
+            <h2>Grade Conversion Reference</h2>
+            <div class="conversion-tables">
+                <div class="conversion-table" id="conversionReference">
+                    <!-- Conversion table will be populated based on selected system -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Initialize theme on page load
+        document.addEventListener("DOMContentLoaded", function() {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-mode');
+            }
+        });
+    </script>
+    <script src="analytics.js"></script>
+</body>
+</html>

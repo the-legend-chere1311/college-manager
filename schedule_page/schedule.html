@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="schedule.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Josefin+Sans">
+    <title>Schedule | Task Manager</title>
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.css" rel="stylesheet"/>
+</head>
+<body>
+    <div class="sidebar">
+        <a href="../index.html"><img src="../icons/home.png"></a>
+        <a href="../task_page/task.html"><img src="../icons/tasks.png"></a>
+        <a class="active" href="../schedule_page/schedule.html"><img src="../icons/schedule.png"></a>
+        <a href="../exams_page/exams.html"><img src="../icons/exams.png"></a>
+        <a href="../analytics_page/analytics.html"><img src="../icons/analytics.png"></a>
+        <a href="../settings_page/settings.html"><img src="../icons/settings.png"></a>
+    </div>
+    <h1>Schedule</h1>
+
+    <!-- Controls -->
+    <div class="controls">
+        <button id="exportBtn">Export .ics</button>
+        <label for="importFile" class="file-label">Import .ics</label>
+        <input type="file" id="importFile" accept=".ics" hidden />
+    </div>
+
+    <div class="content">
+        <div class="container">
+            <div class="box">
+                <div style="width: 95%;">
+                    <div id="calendar"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+<div id="eventModal" class="modal">
+    <div class="modal-content">
+        <h2 id="modalTitle">Add Event</h2>
+        <input type="text" id="eventTitle" placeholder="Event title" />
+        
+        <!-- Duration Controls -->
+        <div class="duration-controls">
+            <h3>Duration</h3>
+            <div class="time-inputs">
+                <div class="time-input-group">
+                    <label for="startTime">Start:</label>
+                    <input type="time" id="startTime" />
+                </div>
+                <div class="time-input-group">
+                    <label for="endTime">End:</label>
+                    <input type="time" id="endTime" />
+                </div>
+            </div>
+            
+            <!-- Quick Duration Buttons -->
+            <div class="quick-duration-buttons">
+                <button type="button" class="duration-btn" data-minutes="15">15m</button>
+                <button type="button" class="duration-btn" data-minutes="30">30m</button>
+                <button type="button" class="duration-btn" data-minutes="45">45m</button>
+                <button type="button" class="duration-btn" data-minutes="60">1h</button>
+                <button type="button" class="duration-btn" data-minutes="90">1h 30m</button>
+                <button type="button" class="duration-btn" data-minutes="120">2h</button>
+            </div>
+            
+            <!-- Custom Duration Input -->
+            <div class="custom-duration">
+                <label for="customDuration">Custom (minutes):</label>
+                <input type="number" id="customDuration" min="1" max="1440" placeholder="e.g. 23" />
+                <button type="button" id="applyCustomDuration">Apply</button>
+            </div>
+        </div>
+        
+        <div class="modal-actions">
+        <button id="saveEventBtn">Save</button>
+        <button id="deleteEventBtn" style="display:none;">Delete</button>
+        <button id="cancelEventBtn">Cancel</button>
+        </div>
+    </div>
+</div>
+
+
+
+    <!-- Scripts -->
+    <script>
+        // Initialize theme on page load
+        document.addEventListener("DOMContentLoaded", function() {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-mode');
+            }
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/ics/dist/ics.deps.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ical.js/1.4.0/ical.min.js"></script>
+    <script src="schedule.js"></script>
+</body>
+</html>
