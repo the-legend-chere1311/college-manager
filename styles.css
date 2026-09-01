@@ -103,7 +103,7 @@ h1 {
     height: 100%;
     display: flex;
     flex-direction: column;
-    background: linear-gradient(135deg, #1db954, #1ed760);
+    background: #34495e;
     border-radius: 15px;
     position: relative;
 }
